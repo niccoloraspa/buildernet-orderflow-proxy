@@ -59,9 +59,6 @@ jobs:
           name: OrderflowProxy ${{ github.event.inputs.release_tag }}
           tag_name: ${{ github.event.inputs.release_tag }}
           files: |
-            build/orderflow-proxy-sender-${{ github.event.inputs.release_tag }}-linux-amd64
-            build/orderflow-proxy-sender-${{ github.event.inputs.release_tag }}-linux-amd64.tar.gz
-            build/orderflow-proxy-receiver-${{ github.event.inputs.release_tag }}-linux-amd64
-            build/orderflow-proxy-receiver-${{ github.event.inputs.release_tag }}-linux-amd64.tar.gz
+            build/orderflow-proxy-*
             build/SHA256SUMS
           generate_release_notes: true
