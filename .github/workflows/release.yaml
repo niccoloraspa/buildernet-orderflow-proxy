@@ -42,9 +42,11 @@ jobs:
       - name: Create GitHub Release and upload binaries
         uses: softprops/action-gh-release@v2
         with:
+          name: Orderflow Proxy ${{ github.event.inputs.release_tag }}
           tag_name: ${{ github.event.inputs.release_tag }}
           files: |
-            build/*
+            build/receiver-proxy
+            build/sender-proxy
           generate_release_notes: true
 
   # github-release:
