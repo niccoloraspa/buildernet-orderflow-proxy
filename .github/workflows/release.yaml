@@ -11,7 +11,7 @@ permissions:
   contents: write
 
 jobs:
-  build-and-release:
+  release:
     runs-on: ubuntu-latest
     env:
       VERSION: ${{ github.event.inputs.release_tag }}
@@ -42,16 +42,14 @@ jobs:
 
           # sender
           mv sender-proxy orderflow-proxy-sender-${TAG}-linux-amd64
-          cp orderflow-proxy-sender-${TAG}-linux-amd64 orderflow-proxy-sender-${TAG}-linux-amd64.bin
           tar -czf orderflow-proxy-sender-${TAG}-linux-amd64.tar.gz orderflow-proxy-sender-${TAG}-linux-amd64
 
           # receiver
           mv receiver-proxy orderflow-proxy-receiver-${TAG}-linux-amd64
-          cp orderflow-proxy-receiver-${TAG}-linux-amd64 orderflow-proxy-receiver-${TAG}-linux-amd64.bin
           tar -czf orderflow-proxy-receiver-${TAG}-linux-amd64.tar.gz orderflow-proxy-receiver-${TAG}-linux-amd64
 
           # checksums
-          sha256sum orderflow-proxy-*-${TAG}-linux-amd64* > SHA256SUMS
+          sha256sum orderflow-proxy-* > SHA256SUMS
 
       - name: Create GitHub Release and upload binaries
         uses: softprops/action-gh-release@v2
