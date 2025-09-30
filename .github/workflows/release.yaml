@@ -32,20 +32,20 @@ jobs:
         with:
           go-version-file: go.mod
           check-latest: true
-
-      - name: Allow Git workspace
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      
+      - name: Download dependencies
+        run: go mod download
 
       - name: Build binaries
         run: make build
 
-      # - name: Create GitHub Release and upload binaries
-      #   uses: softprops/action-gh-release@v2
-      #   with:
-      #     tag_name: ${{ github.event.inputs.release_tag }}
-      #     files: |
-      #       build/*
-      #     generate_release_notes: true
+      - name: Create GitHub Release and upload binaries
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event.inputs.release_tag }}
+          files: |
+            build/*
+          generate_release_notes: true
 
   # github-release:
   #   runs-on: ubuntu-latest
